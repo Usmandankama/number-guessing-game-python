@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .game-container {
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="number"]:focus {
+            border-color: #2980b9;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            outline: none;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .alert-success {
+            background-color: #2ecc71;
+            animation: slideIn 0.5s ease-out;
+        }
+        .alert-error {
+            background-color: #e74c3c;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Number Guessing Game</h1>
+        <h3>Score: {{score}}</h3>
+    </header>
+    <h1 style="text-align: center; color: white;"><a style="color: white;"  href="/leaderboard">leaderboard</a></h1>
+    <main>
+        <div class="game-container">
+            <form method="post">
+                <input type="number" name="guess" id="guess" placeholder="Enter a number between 1 and 10">
+                <button type="submit">Submit</button>
+            </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

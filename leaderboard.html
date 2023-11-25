@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboards</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+        }
+        td {
+            background-color: #555;
+        }
+        tr:nth-child(even) td {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Leaderboards</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>User1</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>User2</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>User3</td>
+                    <td>18</td>
+                </tr>
+                <!-- Add more leaderboard data dynamically -->
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
