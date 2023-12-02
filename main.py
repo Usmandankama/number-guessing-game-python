@@ -37,7 +37,6 @@ def game():
                 flash('Congratulations! You guessed the correct number!', 'success')
                 guess_count = 0
                 score+=1;
-                
                 # Increase user score in the database
                 cursor.execute('UPDATE users SET score = score + 1 WHERE username = %s', (session['username'],))
                 conn.commit()
@@ -51,12 +50,11 @@ def game():
                         guess_count+1;
                 else:
                     flash(f"10 guesse made! The correct answer is {actual_number}" ,'error') 
-            
             conn.close()
     return render_template('game.html', score=score)
 
 # Home route (Index)
-@app.route('/')
+@app.route('/', methods = ['GET','POST'])
 def index():
     if 'username' not in session:
         return redirect('/login')
@@ -73,6 +71,8 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        if username == 'admin' and password == 'admin':
+            return redirect('/admin')
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
@@ -104,12 +104,33 @@ def register():
 
 @app.route('/admin')
 def admin():
-    return  render_template('admin.html')
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM users')
+    users = cursor.fetchall()
+    print()
+    cursor.execute('SELECT username,score FROM users ORDER BY score DESC LIMIT 10')
+    leaderboard = cursor.fetchall()     
+    conn.close()
+    return  render_template('admin.html',users=users,leaderboard=leaderboard)
+
+@app.route('/contact')
+def contact():
+    return  render_template('contactus.html')
+
+@app.route('/feedback')
+def feedback():
+    return  render_template('feedback.html')
 
 
 @app.route('/leaderboard')
 def leaderboard():
-    return render_template('leaderboard.html')
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT username,score FROM users ORDER BY score DESC LIMIT 10')
+    result = cursor.fetchall()        
+    conn.close()
+    return render_template('leaderboard.html', leaderboard=result)
 
 # Logout route
 @app.route('/logout')

@@ -5,6 +5,7 @@
     <title>Number Guessing Game</title>
     <style>
         body {
+            overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
@@ -30,7 +31,7 @@
         }
         input[type="number"] {
             padding: 10px;
-            font-size: 1.5em;
+            font-size: 16px;
             margin-bottom: 20px;
             border: 2px solid #3498db;
             border-radius: 5px;
@@ -89,6 +90,7 @@
 </head>
 <body>
     <header>
+        <button class="back-btn"><a href="/">Back</a></button>
         <h1>Number Guessing Game</h1>
         <h3>Score: {{score}}</h3>
     </header>

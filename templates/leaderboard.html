@@ -51,34 +51,24 @@
 </head>
 <body>
     <header>
+        <button class="back-btn"><a href="/game">Back</a></button>
         <h1>Leaderboards</h1>
     </header>
     <main>
         <table>
             <thead>
                 <tr>
-                    <th>Rank</th>
                     <th>Username</th>
                     <th>Score</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>User1</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>User2</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>User3</td>
-                    <td>18</td>
-                </tr>
-                <!-- Add more leaderboard data dynamically -->
+                {%for user in leaderboard%}
+                    <tr>
+                        <td>{{user['username']}}</td>
+                        <td>{{user['score']}}</td>
+                    </tr>
+                {%endfor%}
             </tbody>
         </table>
     </main>
